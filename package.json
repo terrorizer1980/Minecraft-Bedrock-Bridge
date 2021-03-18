@@ -1,0 +1,28 @@
+{
+  "name": "minecraft_phantom_gui",
+  "version": "1.0.0",
+  "description": "Electron GUI for phantom",
+  "main": "index.js",
+  "scripts": {
+    "test": "electron --no-sandbox ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sirherobrine23/Minecraft_phantom_GUI.git"
+  },
+  "keywords": [
+    "minecraft"
+  ],
+  "author": "Sirherobrine23",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Sirherobrine23/Minecraft_phantom_GUI/issues"
+  },
+  "homepage": "https://github.com/Sirherobrine23/Minecraft_phantom_GUI#readme",
+  "devDependencies": {
+    "electron": "^12.0.1"
+  },
+  "dependencies": {
+    "@electron/remote": "^1.0.4"
+  }
+}

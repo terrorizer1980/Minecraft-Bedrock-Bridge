@@ -1,4 +1,4 @@
-# Minecraft_Phatom_GUI
+# Minecraft_phantom_GUI
 a GUI based entirely on Electron.
 
 The phantom is a bridge for you to be able to connect Minecraft bedrock to Xbox, Playstation, and other devices to any server that Minecraft itself does not recognize as official.

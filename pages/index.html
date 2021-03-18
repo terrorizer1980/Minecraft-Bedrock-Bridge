@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="./main.css">
+</head>
+<body>
+    <div id="status" class="stoped">
+        <span class="status" id="stoped">Stopped</span>
+        <span class="status" id="wait">Waiting</span>
+        <span class="status" id="sucess">Success</span>
+        <span class="status" id="error">Error</span>
+    </div>
+    <script>
+        var wait_count = 0;
+        setInterval(() => {
+            wait_count++
+            if (wait_count === 1) document.getElementById("wait").innerHTML = "Waiting"
+            else if (wait_count === 2) document.getElementById("wait").innerHTML = "Waiting ."
+            else if (wait_count === 3) document.getElementById("wait").innerHTML = "Waiting .."
+            else if (wait_count === 4) document.getElementById("wait").innerHTML = "Waiting ..."
+            else wait_count = 0
+            
+        }, 300);
+    </script>
+    <div>
+        <a href="#start" onclick="run();">Start/Stop</a>
+    </div>
+    <div class="config">
+        <span>Server URL or IP: </span><input type="text" id="server_url" onchange="update_url()"><br>
+        <span>Server port: </span><input type="number" id="server_port" onchange="update_port()">
+    </div>
+</body>
+</html>
+<script src="./main.js"></script>

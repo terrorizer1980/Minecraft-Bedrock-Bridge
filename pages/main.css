@@ -1,0 +1,24 @@
+html, body {
+    background-color: rgb(118, 114, 114);
+    text-align: center;
+}
+
+.sucess #sucess {
+    display: block;
+    color: green;
+}
+.stoped #stoped {
+    display: block;
+    color: black;
+}
+.wait #wait {
+    display: block;
+    color: orange;
+}
+.error #error {
+    display: block;
+    color: red;
+}
+.status {
+    display: none;
+}
