@@ -7,10 +7,11 @@ on:
 
 env:
   tag_name: v-${{ github.sha  }}
+  GH_TOKEN: 'unde'
 
 jobs:
   build_windows:
-    name: build
+    name: Windows
     runs-on: windows-latest
     steps:
     - name: Checkout repository
@@ -29,7 +30,7 @@ jobs:
         files: ./dist/*.*
 
   build_linux:
-    name: build
+    name: Linux
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -48,7 +49,7 @@ jobs:
         files: ./dist/*.*
 
   build_macos:
-    name: build
+    name: MacOS
     runs-on: macos-latest
     steps:
     - name: Checkout repository
