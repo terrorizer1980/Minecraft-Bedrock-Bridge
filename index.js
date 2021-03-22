@@ -9,16 +9,20 @@ process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = "true"
 function createWindow () {
   // Load Pages
     const win = new BrowserWindow({
+        // Width
         minWidth: 500,
+        maxWidth: 900,
+        // Height
         minHeight: 500,
-        maxWidth: 1000,
-        maxHeight: 1000,
+        maxHeight: 500,
+        // Preferences
         webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false,
-        enableRemoteModule: true,
-        sandbox: false,
-        devTools: true
+          nodeIntegration: true,
+          contextIsolation: false,
+          enableRemoteModule: true,
+          sandbox: false,
+          devTools: true,
+          maximizable: false
         }
     });
     win.loadFile(load_pages);

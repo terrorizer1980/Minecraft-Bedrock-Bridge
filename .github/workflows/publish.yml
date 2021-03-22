@@ -1,0 +1,67 @@
+
+name: Publish
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  tag_name: v-${{ github.sha  }}
+
+jobs:
+  build_windows:
+    name: build
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - run: |
+        npm install
+        npm run build:win
+    - name: Releases
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        name: Releases ${{ github.tag_name }}
+        tag_name: ${{ github.tag_name }}
+        files: ./dist/*.*
+
+  build_linux:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - run: |
+        npm install
+        npm run build:linux
+    - name: Releases
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        name: Releases ${{ github.tag_name }}
+        tag_name: ${{ github.tag_name }}
+        files: ./dist/*.*
+
+  build_macos:
+    name: build
+    runs-on: macos-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - run: |
+        npm install
+        npm run build:mac
+    - name: Releases
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        name: Releases ${{ github.tag_name }}
+        tag_name: ${{ github.tag_name }}
+        files: ./dist/*.*

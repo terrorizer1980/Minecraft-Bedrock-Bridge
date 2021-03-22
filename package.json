@@ -4,7 +4,11 @@
   "description": "Electron GUI for phantom",
   "main": "index.js",
   "scripts": {
-    "test": "electron --no-sandbox ."
+    "test": "electron --no-sandbox .",
+    "build:mac": "electron-builder --x64 --arm64 --macos",
+    "build:win": "electron-builder --x64 --ia32 --arm64 --windows",
+    "build:linux": "electron-builder --x64 --ia32 --armv7l --arm64 --linux",
+    "build": "npm run build:linux && build:mac && build:win"
   },
   "repository": {
     "type": "git",
@@ -20,9 +24,60 @@
   },
   "homepage": "https://github.com/Sirherobrine23/Minecraft_phantom_GUI#readme",
   "devDependencies": {
-    "electron": "^12.0.1"
+    "electron": "^12.0.1",
+    "electron-builder": "^22.10.5"
   },
   "dependencies": {
     "@electron/remote": "^1.0.4"
+  },
+  "build": {
+    "appId": "com.sirherobrine23.phantomgui",
+    "asar": false,
+    "asarUnpack": true,
+    "nsis": {
+        "oneClick": "false",
+        "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
+        "allowToChangeInstallationDirectory": "true"
+    },
+    "portable": {
+        "artifactName": "${productName}-Portable-${version}-${arch}.${ext}"
+    },
+    "deb": {
+        "depends": [
+            "gconf2",
+            "gconf-service",
+            "libnotify4",
+            "libappindicator1",
+            "libxtst6",
+            "libnss3",
+            "curl"
+        ]
+    },
+    "win": {
+        "target": [
+            "nsis",
+            "portable"
+        ]
+    },
+    "linux": {
+      "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
+      "target": [
+          "deb",
+          "AppImage",
+          "rpm",
+          "zip",
+          "7z",
+          "tar.gz",
+          "apk",
+          "pacman"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip",
+        "pkg"
+      ]
+    }
   }
 }

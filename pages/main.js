@@ -55,7 +55,20 @@ function run(){
         phantom_run.stdout.pipe(createWriteStream(join(phantom_path, "latest.log"), {flags: "w"}))
         phantom_run.stdout.on("data", function (data){
             console.log(data);
+            document.getElementById("console_log").innerHTML += data.split("\n").join("<br>")
+            .split("[90m").join("")
+            .split("[0m [32m").join("")
+            .split("[0m ").join("")
+            .split("[31m").join("")
+            .replaceAll("", " ")
+            
+            // Erros detect
             if (data.includes("bind: permission denied")) {
+                status.add("error")
+                status.remove("sucess")
+                status.remove("wait")
+                status.remove("stoped")
+            } else if (data.includes("Server seems to be offline")) {
                 status.add("error")
                 status.remove("sucess")
                 status.remove("wait")
@@ -68,19 +81,17 @@ function run(){
             }
         })
     } else {
-        if (confirm("O phantom está em execução quer para ele?")) {
+        if (confirm("The phantom is running, do you want it?")) {
             phantom_run.kill()
             if (phantom_run.killed) {
-                alert("Parado com sucesso");
+                alert("Successfully stopped");
                 global.phantom_run = undefined
                 status.remove("error")
                 status.remove("sucess")
                 status.remove("wait")
                 status.add("stoped")
-            } else alert("Tivemos um error para par o servidor")
-        } else {
-            alert("O phantom não foi parado, continuando")
-        }
+            } else alert("We had an error for the server")
+        } else alert("The phantom was not stopped, continuing")
     }
 }
 
@@ -99,4 +110,17 @@ function update_port(){
     const phantom_config = JSON.parse(readFileSync(json_config, "utf8"));
     phantom_config.port = server_port
     writeFileSync(json_config, JSON.stringify(phantom_config, null, 2))
+}
+
+function showLog(){
+    const logDiv = document.getElementById("console_log_div")
+    const buttom = document.getElementById("buttomlog")
+    if (logDiv.style.display === "none") {
+        logDiv.style.display = "block"
+        buttom.innerHTML = "hide the Phantom logs"
+    }
+    else {
+        logDiv.style.display = "none"
+        buttom.innerHTML = "Show the phantom logs"
+    }
 }

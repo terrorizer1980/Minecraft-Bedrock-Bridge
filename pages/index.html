@@ -7,7 +7,7 @@
     <title>Phantom</title>
     <link rel="stylesheet" type="text/css" media="screen" href="./main.css">
 </head>
-<body>
+<body class="default">
     <div id="status" class="stoped">
         <span class="status" id="stoped">Stopped</span>
         <span class="status" id="wait">Waiting</span>
@@ -26,12 +26,16 @@
             
         }, 300);
     </script>
-    <div>
-        <a href="#start" onclick="run();">Start/Stop</a>
+    <div class="container_root">
+        <button href="#start" onclick="run();" class="StartStopbuttom">Start/Stop</button>
+        <div class="config">
+            <p><span>Server URL or IP: </span><input type="text"   id="server_url"  oninput="update_url();" onchange="update_url()" ></p>
+            <p><span>Server port:      </span><input type="number" id="server_port" oninput="update_url();" onchange="update_port()"></p>
+            <p><button onclick="showLog();" id="buttomlog">Show the phantom logs</button></p>
+        </div>
     </div>
-    <div class="config">
-        <span>Server URL or IP: </span><input type="text" id="server_url" onchange="update_url()"><br>
-        <span>Server port: </span><input type="number" id="server_port" onchange="update_port()">
+    <div class="console_log" id="console_log_div" style="display: none;">
+        <div id="console_log"></div>
     </div>
 </body>
 </html>

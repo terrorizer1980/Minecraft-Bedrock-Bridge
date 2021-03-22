@@ -1,23 +1,95 @@
+@font-face {
+    font-family: minecraft;
+    src: url(https://raw.githubusercontent.com/The-Bds-Maneger/Web-Control/5adbfc3de18e632c1a2cc84c12f3b90b2ce98c1a/assents/css/Minecraft.ttf);
+}
+@font-face {
+    font-family: minecraft-bold;
+    src: url(https://raw.githubusercontent.com/The-Bds-Maneger/Web-Control/5adbfc3de18e632c1a2cc84c12f3b90b2ce98c1a/assents/css/Mojang-Bold.ttf);
+}
+@font-face {
+    font-family: minecraft-regular;
+    src: url(https://raw.githubusercontent.com/The-Bds-Maneger/Web-Control/5adbfc3de18e632c1a2cc84c12f3b90b2ce98c1a/assents/css/Mojang-Regular.ttf);
+}
+*{
+    font-family: "minecraft", "minecraft-bold", "minecraft-regular";
+}
+
+.default {
+    --text-primary: #fff;
+    --text-secondary: rgb(189, 189, 189);
+    --bg-primary: #1d1d1d;
+    --bg-secondary: #3e3e3e;
+    --box-primary: rgba(0,0,0,0.4);
+    --border-color: rgba(0,0,0,0.5);
+
+    /* Colors status */
+    --staus-sucess: rgb(18, 203, 101);
+    --staus-stoped: rgb(201, 201, 201);
+    --staus-wait: rgb(198, 201, 33);
+    --staus-error: rgb(255, 0, 0);
+}
+
 html, body {
-    background-color: rgb(118, 114, 114);
+    background-color: var(--bg-primary);
     text-align: center;
+    color: var(--text-primary);
+}
+
+a {
+    color: var(--text-secondary);
+}
+
+.container_root {
+    border-radius: 0.5rem;
+    width: 90%;
+    height: 90%;
+    margin-left: 5vh;
+    margin-right: 10vh;
+    margin-top: 2vh;
+    background-color: var(--bg-secondary);
+    padding-top: 2vh;
+}
+
+.StartStopbuttom {
+    color: var(--text-primary);
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.console_log {
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+    font-family: minecraft;
+    font-size: 2.4vh !important;
+    border-radius: 2px;
+    min-width: 100%;
+    min-height: 100%;
+    line-height: 4.5vh;
+    display: none;
+}
+
+input[type="text"], input[type="number"] {
+    border-radius: 1vh;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
 }
 
 .sucess #sucess {
     display: block;
-    color: green;
+    color: var(--staus-sucess);
 }
 .stoped #stoped {
     display: block;
-    color: black;
+    color: var(--staus-stoped);
 }
 .wait #wait {
     display: block;
-    color: orange;
+    color: var(--staus-wait);
 }
 .error #error {
     display: block;
-    color: red;
+    color: var(--staus-error);
 }
 .status {
     display: none;
