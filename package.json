@@ -25,7 +25,8 @@
   "homepage": "https://github.com/Sirherobrine23/Minecraft_phantom_GUI#readme",
   "devDependencies": {
     "electron": "^12.0.1",
-    "electron-builder": "^22.10.5"
+    "electron-builder": "^22.10.5",
+    "xmldom": ">=0.5.0"
   },
   "dependencies": {
     "@electron/remote": "^1.0.4"
@@ -35,37 +36,37 @@
     "asar": false,
     "asarUnpack": true,
     "nsis": {
-        "oneClick": "false",
-        "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
-        "allowToChangeInstallationDirectory": "true"
+      "oneClick": "false",
+      "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
+      "allowToChangeInstallationDirectory": "true"
     },
     "portable": {
-        "artifactName": "${productName}-Portable-${version}-${arch}.${ext}"
+      "artifactName": "${productName}-Portable-${version}-${arch}.${ext}"
     },
     "deb": {
-        "depends": [
-            "gconf2",
-            "gconf-service",
-            "libnotify4",
-            "libappindicator1",
-            "libxtst6",
-            "libnss3",
-            "curl"
-        ]
+      "depends": [
+        "gconf2",
+        "gconf-service",
+        "libnotify4",
+        "libappindicator1",
+        "libxtst6",
+        "libnss3",
+        "curl"
+      ]
     },
     "win": {
-        "target": [
-            "nsis",
-            "portable"
-        ]
+      "target": [
+        "nsis",
+        "portable"
+      ]
     },
     "linux": {
       "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
       "target": [
-          "deb",
-          "AppImage",
-          "zip",
-          "7z"
+        "deb",
+        "AppImage",
+        "zip",
+        "7z"
       ]
     },
     "mac": {
