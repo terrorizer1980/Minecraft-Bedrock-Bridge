@@ -64,12 +64,8 @@
       "target": [
           "deb",
           "AppImage",
-          "rpm",
           "zip",
-          "7z",
-          "tar.gz",
-          "apk",
-          "pacman"
+          "7z"
       ]
     },
     "mac": {
