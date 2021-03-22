@@ -7,7 +7,6 @@ on:
 
 env:
   tag_name: v-${{ github.sha  }}
-  GH_TOKEN: 'unde'
 
 jobs:
   build_windows:
@@ -20,6 +19,8 @@ jobs:
     - run: |
         npm install
         npm run build:win
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Releases
       uses: softprops/action-gh-release@v1
       env:
@@ -39,6 +40,8 @@ jobs:
     - run: |
         npm install
         npm run build:linux
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Releases
       uses: softprops/action-gh-release@v1
       env:
@@ -58,6 +61,8 @@ jobs:
     - run: |
         npm install
         npm run build:mac
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Releases
       uses: softprops/action-gh-release@v1
       env:
