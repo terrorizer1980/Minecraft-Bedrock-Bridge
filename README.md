@@ -1,6 +1,6 @@
 # The Bds Bridge
 
-O Minecraft Bridge ajudar os jogadores do Bedrock a se conectar ao um mundo fora da LAN ou poder deixar voçê jogar com seus amigos do Java.
+Minecraft Bridge will help Bedrock players connect to a world outside the LAN or be able to let you play with your Java friends.
 
 For this we use [GayserⒸ](https://github.com/GeyserMC/Geyser) and [PhantomⒸ](https://github.com/jhead/phantom)
 
