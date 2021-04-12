@@ -1,7 +1,7 @@
 {
-  "name": "minecraft_phantom_gui",
+  "name": "bds-bridge",
   "version": "1.0.0",
-  "description": "Electron GUI for phantom",
+  "description": "Electron GUI for Bridge Minecraft",
   "main": "index.js",
   "scripts": {
     "test": "electron --no-sandbox .",
@@ -29,7 +29,8 @@
     "xmldom": ">=0.5.0"
   },
   "dependencies": {
-    "@electron/remote": "^1.0.4"
+    "@electron/remote": "^1.0.4",
+    "yaml": "^1.10.2"
   },
   "build": {
     "appId": "com.sirherobrine23.phantomgui",

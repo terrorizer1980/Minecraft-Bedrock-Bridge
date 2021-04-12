@@ -1,126 +1,127 @@
 const { exec } = require("child_process")
+const { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync, chmodSync } = require("fs")
 const { resolve, join } = require("path")
-const { existsSync, mkdirSync, writeFileSync, readFileSync, createWriteStream, chmodSync } = require("fs")
-const { platform, arch, env } = process
-// -----------------------------------------------------
-function get_radom_port(){
-    const port_randed = Math.trunc(Math.random() * 10000 * (Math.random() / 0.15))
-    if (port_randed > 65530) return get_radom_port()
-    else if (port_randed < 1025) return get_radom_port()
-    else return port_randed
-}
-var phantom_config = {
-    version: "v0.5.2",
-    server: "pe.hypixel.net",
-    bind_port: get_radom_port(),
-    port: 19132
-}
-const phantom_path = resolve((env.HOME||env.USERPROFILE), "phantom");if (!(existsSync(phantom_path))) mkdirSync(phantom_path)
-const json_config = join(phantom_path, "phantom.json");if (existsSync(json_config)) phantom_config = JSON.parse(readFileSync(json_config, "utf8")); else writeFileSync(json_config, JSON.stringify(phantom_config, null, 2))
-var bin_file;if (platform === "win32") bin_file = "phantom.exe"; else bin_file = "phantom";const bin_save = join(phantom_path, bin_file)
-
-function download(){
-    fetch("https://api.github.com/repos/jhead/phantom/releases").then(response => response.json()).then(response => {
-        const pdtag = response[0].tag_name;
-        console.log(`Phantom tag version: ${phantom_config.version}`)
-        if (phantom_config.version !== pdtag){
-            phantom_config.version = pdtag
-            writeFileSync(json_config, JSON.stringify(phantom_config, null, 2))
-            var url_download;
-            if (platform === "linux") {
-                if (arch === "x64") url_download = `https://github.com/jhead/phantom/releases/download/${pdtag}/phantom-linux`
-                else if (arch === "arm64") url_download = `https://github.com/jhead/phantom/releases/download/${pdtag}/phantom-linux-arm8`
-                else {alert("Please select the compatible file for your architecture.");open("https://github.com/jhead/phantom/releases")}
-            } else if (platform === "win32") {
-                if (arch === "x64") url_download = `https://github.com/jhead/phantom/releases/download/${pdtag}/phantom-windows.exe`
-                else if (arch === "x86") url_download = `https://github.com/jhead/phantom/releases/download/${pdtag}/phantom-windows-32bit.exe`
-                else {alert("Architecting not compatible with our program");open("https://github.com/jhead/phantom/releases")}
-            } else if (platform === "darwin") url_download = `https://github.com/jhead/phantom/releases/download/${pdtag}/phantom-macos`
-            else alert("Platform not compatible")
-            console.log(pdtag + " :/: " + url_download);
-            fetch(url_download).then(response => response.arrayBuffer()).then(response => Buffer.from(response)).then(response => {
-                console.log("Download Sucess")
-                writeFileSync(bin_save, response, "binary")
-                chmodSync(bin_save, "775")
-                console.log("Save sucess")
-            })
+const yml = require("yaml")
+const { Z_BLOCK } = require("zlib")
+const Package_Json = JSON.parse(readFileSync(resolve(__dirname, "..", "package.json"), "utf8"))
+const BridgeConfigHome = resolve((process.env.USERPROFILE||process.env.HOME), "BdsBridge")
+if(!(existsSync(BridgeConfigHome))) mkdirSync(BridgeConfigHome)
+// 'arm', 'arm64', 'ia32', 'mips','mipsel', 'ppc', 'ppc64', 's390', 's390x', 'x32', and 'x64'
+const VersionFile = {
+    "gayser": {
+        "oficial": "https://ci.opencollab.dev//job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/standalone/target/Geyser.jar",
+        "sponge": "https://ci.opencollab.dev//job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/sponge/target/Geyser-Sponge.jar",
+        "spigot": "https://ci.opencollab.dev//job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/spigot/target/Geyser-Spigot.jar"
+    },
+    "phantom": {
+        "win32": {
+            "ia32": "https://github.com/jhead/phantom/releases/download/${{VERSION}}/phantom-windows-32bit.exe",
+            "x64": "https://github.com/jhead/phantom/releases/download/${{VERSION}}/phantom-windows.exe"
+        },
+        "linux": {
+            "ia32": null,
+            "x64": "https://github.com/jhead/phantom/releases/download/${{VERSION}}/phantom-linux",
+            "aarch64": "https://github.com/jhead/phantom/releases/download/${{VERSION}}/phantom-linux-arm8"
+        },
+        "darwin":{
+            "ia32": null,
+            "x64": "https://github.com/jhead/phantom/releases/download/${{VERSION}}/phantom-macos",
+            "aarch64": "https://github.com/jhead/phantom/releases/download/${{VERSION}}/phantom-macos"
         }
-    })
-}
-download()
-const status = document.getElementById("status").classList
-function run(){
-    if (global.phantom_run === undefined){
-        global.phantom_run = exec(`${bin_save} --server ${phantom_config.server}:${phantom_config.port} --bind_port ${phantom_config.bind_port} --timeout 30`)
-        phantom_run.stdout.pipe(createWriteStream(join(phantom_path, "latest.log"), {flags: "w"}))
-        phantom_run.stdout.on("data", function (data){
-            console.log(data);
-            document.getElementById("console_log").innerHTML += data.split("\n").join("<br>")
-            .split("[90m").join("")
-            .split("[0m [32m").join("")
-            .split("[0m ").join("")
-            .split("[31m").join("")
-            .replaceAll("", " ")
-            
-            // Erros detect
-            if (data.includes("bind: permission denied")) {
-                status.add("error")
-                status.remove("sucess")
-                status.remove("wait")
-                status.remove("stoped")
-            } else if (data.includes("Server seems to be offline")) {
-                status.add("error")
-                status.remove("sucess")
-                status.remove("wait")
-                status.remove("stoped")
-            } else {
-                status.remove("error")
-                status.add("sucess")
-                status.remove("wait")
-                status.remove("stoped")
-            }
-        })
-    } else {
-        if (confirm("The phantom is running, do you want it?")) {
-            phantom_run.kill()
-            if (phantom_run.killed) {
-                alert("Successfully stopped");
-                global.phantom_run = undefined
-                status.remove("error")
-                status.remove("sucess")
-                status.remove("wait")
-                status.add("stoped")
-            } else alert("We had an error for the server")
-        } else alert("The phantom was not stopped, continuing")
     }
 }
 
-document.getElementById("server_url").value = phantom_config.server
-function update_url(){
-    const server = document.getElementById("server_url").value
-    const phantom_config = JSON.parse(readFileSync(json_config, "utf8"));
-    phantom_config.server = server
-    writeFileSync(json_config, JSON.stringify(phantom_config, null, 2))
+function PrepareConfig(){
+    const configFile = join(BridgeConfigHome, "BdsConfig.json");
+    const config = {
+        "version": Package_Json.version,
+        "bridge": "phantom",
+        "url": "minecraft.shs23.org",
+        "port": 1841
+    }
+    writeFileSync(configFile, JSON.stringify(config, null, 4))
+    return config
 }
+const configFile = join(BridgeConfigHome, "config.json");
+var config;
+if (existsSync(configFile)) config = JSON.parse(readFileSync(configFile, "utf8")); else config = PrepareConfig()
 
-document.getElementById("server_port").value = phantom_config.port
-function update_port(){
-    const server_port = document.getElementById("server_port").value
-    console.log(server_port);
-    const phantom_config = JSON.parse(readFileSync(json_config, "utf8"));
-    phantom_config.port = server_port
-    writeFileSync(json_config, JSON.stringify(phantom_config, null, 2))
-}
-
-function showLog(){
-    const logDiv = document.getElementById("console_log_div")
-    const buttom = document.getElementById("buttomlog")
-    if (logDiv.style.display === "none") {
-        logDiv.style.display = "block"
-        buttom.innerHTML = "hide the Phantom logs"
+function DownloadSoftware(){
+    if (config.bridge === "phantom") {
+        fetch("https://api.github.com/repos/jhead/phantom/releases").then(res => res.json()).then(res => {
+            var url = VersionFile.phantom[process.platform][process.arch]
+            if (url === null) throw Error("Arch Not supported")
+            else if (url === undefined) throw Error("Arch Not supported")
+            url = url.replaceAll("${{VERSION}}", res[0].tag_name)
+            console.log(url);
+            var file_name = url.split("/");file_name = file_name[file_name.length-1];
+            return fetch(url).then(response => response.arrayBuffer()).then(response => Buffer.from(response)).then(response => {
+                console.log("Download Sucess")
+                writeFileSync(resolve(BridgeConfigHome, file_name), response, "binary")
+                if (process.platform !== "win32") chmodSync(resolve(BridgeConfigHome, file_name), 7777)
+                console.log("Save sucess");
+                return true
+            })
+        }).catch(err => console.error(err))
     }
     else {
-        logDiv.style.display = "none"
-        buttom.innerHTML = "Show the phantom logs"
+        let url = VersionFile.gayser.oficial
+        return fetch(url).then(response => response.arrayBuffer()).then(response => Buffer.from(response)).then(response => {
+            console.log("Download Sucess")
+            writeFileSync(join(BridgeConfigHome, "Gayser.jar"), response, "binary")
+            if (process.platform !== "win32") chmodSync(join(BridgeConfigHome, "Gayser.jar"), 7777)
+            console.log("Save sucess");
+        }).catch(err => console.error(err))
     }
+}
+
+function BridgeStart(){
+    if (typeof global.BridgeHill === "undefined"){
+        var command, baseCommand="", Argv;
+        if (config.bridge === "phantom") {
+            dir = readdirSync(BridgeConfigHome)
+            if (process.platform !== "win32") baseCommand = "./"
+            for (let dirFile of dir) 
+                if (dirFile.includes("phantom")) command = dirFile;
+            Argv = ` -server ${config.url}:${config.port}`
+        } else {
+            baseCommand = "java -jar --nogui "
+            command = "Gayser.jar"
+            Argv = ""
+            const config_yml = join(BridgeConfigHome, "config.yml")
+            const yml_config = yml.parse(readFileSync(config_yml, "utf8"))
+            yml_config.remote.address = config.url
+            yml_config.remote.port = config.port
+            yml_config.remote["auth-type"] = "floodgate"
+            writeFileSync(config_yml, yml.stringify(yml_config))
+        }
+        if (command === undefined) throw Error("File not Detect")
+        // -*-**-*-*-*-*-*-*-*-*-*-*-*--*-*-*-**-*-**-*-**-**--*-*--*--*-*--*-*--*-*-*--*-*--*-*-*--*-*--*-*--*-*--*-*--
+        if (process.platform !== "win32") chmodSync(resolve(BridgeConfigHome, command), 7777)
+        let commandExec = `${baseCommand}${command}${Argv}`
+        console.log(commandExec);
+        const BridgeHill = exec(commandExec, {
+            cwd: BridgeConfigHome
+        })
+        BridgeHill.stdout.on("data", data => {
+            console.log(data);
+            document.getElementById('LOG').innerHTML += data
+        })
+        BridgeHill.on("exit", code => {
+            console.warn(`Exit code: ${code}`)
+            global.BridgeHill = undefined
+        })
+        global.BridgeHill = BridgeHill
+        return BridgeHill
+    } else throw Error("Started")
+}
+
+function BridgeStop(){
+    if (typeof BridgeHill === "undefined") return alert("Start Bridge")
+    return BridgeHill.kill("SIGKILL")
+}
+
+function BridgeRestart(){
+    BridgeStop()
+    BridgeStart()
 }
