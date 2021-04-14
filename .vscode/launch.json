@@ -8,7 +8,7 @@
         "request": "launch",
         "cwd": "${workspaceFolder}",
         "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
-        "sourceMaps": true,
+        "sourceMaps": false,
         "windows": {
             "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
         },

@@ -11,10 +11,10 @@ function createWindow () {
     const win = new BrowserWindow({
         // Width
         minWidth: 500,
-        maxWidth: 900,
+        maxWidth: 1000,
         // Height
         minHeight: 500,
-        maxHeight: 500,
+        maxHeight: 1000,
         // Preferences
         webPreferences: {
           nodeIntegration: true,
