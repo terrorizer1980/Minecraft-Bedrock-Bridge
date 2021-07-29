@@ -13,6 +13,68 @@
 <body>
     <div>
         <h1>Bds Maneger Bridge</h1>
+        <div>
+            <p>
+                <select id="Platform">
+                    <option value="phantom">Phantom (Minecraft Bedrock)</option>
+                    <option value="gayser">Gayser (Minecraft Java to Minecraft Bedrock)</option>
+                </select>
+                <input type="text" id="AndressUrl" placeholder="t12a300aat.bdsmaneger.com" />
+                <input type="text" id="PortServer" placeholder="Minecraft Server Port" value="19132" />
+                <a href="#" id="StartButton">Start</a>
+                <script>document.getElementById("StartButton").onclick = async function (){
+                    const ApiRest = (await (await fetch("/api/start", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            Platform: document.getElementById("Platform").value,
+                            Server: document.getElementById("AndressUrl").value,
+                            Port: document.getElementById("PortServer").value,
+                        }),
+                    })).text());
+                    console.log(ApiRest);
+                }</script>
+            </p>
+        </div>
+        <div>
+            <h1>Download</h1>
+            <p>
+                <select id="PlatformDownload">
+                    <option value="phantom">Phantom (Minecraft Bedrock)</option>
+                    <option value="gayser">Gayser (Minecraft Java to Minecraft Bedrock)</option>
+                </select>
+                <a href="#Download" id="DownloadButton">Download</a>
+                <script>document.getElementById("DownloadButton").onclick = async function (){
+                    const ApiRest = (await (await fetch("/api/download", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            Platform: document.getElementById("PlatformDownload").value,
+                        }),
+                    })).text());
+                    console.log(ApiRest);
+                }</script>
+            </p>
+        </div>
     </div>
+    <p>
+        <div id="Log"></div>
+    </p>
 </body>
+<script>
+    const log = document.getElementById("Log");
+    function PrintLog(msg) {
+        var item = document.createElement("p");
+        item.innerHTML = msg;
+        log.appendChild(item);
+        console.log(msg)
+        document.getElementById("Log").scrollTo(0, document.getElementById("Log").scrollHeight);
+    }
+    socket.on("Log", PrintLog);
+    socket.on("message", PrintLog);
+</script>
 </html>

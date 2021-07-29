@@ -38,7 +38,9 @@ async function DownloadPlatform(Platform = "phantom", Variant = "oficial"){
     return new Promise(async (resolve, reject) => {
         try {
             if (Platform === "phantom") {
-                const PhantomReleases = await Fetch_JSON("https://api.github.com/repos/jhead/phantom/releases")[0].tag_name;
+                let PhantomReleases = await Fetch_JSON("https://api.github.com/repos/jhead/phantom/releases");
+                PhantomReleases = PhantomReleases[0].tag_name;
+                console.log(PhantomReleases);
                 await Download_File(BridgesDownlaodLink["phantom"][process.platform][process.arch].replaceAll("${{VERSION}}", PhantomReleases), FilesBridgeSave.phantom);
                 if (process.platform !== "win32") fs.chmodSync(FilesBridgeSave.phantom, "755");
                 return resolve(FilesBridgeSave.phantom)
@@ -55,7 +57,7 @@ async function DownloadPlatform(Platform = "phantom", Variant = "oficial"){
 }
 
 function SaveLogFile(data = ""){
-    
+    fs.appendFileSync(path.resolve(os.tmpdir(), "bdsBridgeLog.log"), data);
 }
 
 function StartBridge(Platform = "phantom", Server = "", Port = 19132){

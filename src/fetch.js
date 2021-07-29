@@ -6,11 +6,12 @@ if (typeof fetch === "undefined") global.fetch = require("node-fetch");
 async function Download_File(url = "", Path_Save = "./"){
   return new Promise(async (resolve, reject) => {
     try {
-      const FetchBuffer = Buffer.from((await (await fetch(url)).toArrayBuffer()));
+      const FetchBuffer = Buffer.from((await (await fetch(url)).arrayBuffer()));
+      if (!(fs.existsSync(path.dirname(Path_Save)))) fs.mkdirSync(path.dirname(Path_Save), {recursive: true});
       fs.writeFileSync(Path_Save, FetchBuffer, "binary")
       resolve(Path_Save);
     } catch (err){
-      console.log(er);
+      console.log(err);
       reject(err);
     }
   });
