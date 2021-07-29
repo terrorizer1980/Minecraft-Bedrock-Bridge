@@ -1,0 +1,450 @@
+/* 
+a CSS already included in bds_maneger for managing standard bds_maneger themes.
+
+it's still basic CSS.
+*/
+@font-face {
+    font-family: minecraft;
+    src: url(https://raw.githubusercontent.com/The-Bds-Maneger/Bds-Maneger/main/bds_pages/default/assents/css/Minecraft.ttf);
+}
+@font-face {
+    font-family: minecraft-bold;
+    src: url(https://raw.githubusercontent.com/The-Bds-Maneger/Bds-Maneger/main/bds_pages/default/assents/css/Mojang-Bold.ttf);
+}
+@font-face {
+    font-family: minecraft-regular;
+    src: url(https://raw.githubusercontent.com/The-Bds-Maneger/Bds-Maneger/main/bds_pages/default/assents/css/Mojang-Regular.ttf);
+}
+*{
+  font-family: "minecraft", "minecraft-bold", "minecraft-regular";
+}
+/*input[type="text"] {
+  width: 97%;
+}*/
+input[type="number"]{
+  width: 35%;
+}
+/*input[type="submit"] {
+  margin: none;
+  background-color: transparent;
+  border-color: transparent;
+  margin-left: -60px;
+}*/
+/* Font END */
+
+
+.conatainer_root_display {
+  display: block;
+  /* margin-left: 17rem; */
+  padding: 1rem;
+}
+
+/* Large screens */
+@media only screen and (min-width: 1000px) {
+  .conatainer_root_display {
+    display: block;
+    margin-left: 17rem;
+    padding: 1rem;
+  }
+}
+
+.HomeButton{
+  font-size: small;
+  margin-top: -12vh;
+}
+
+.HomeDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.HomeDivButton {
+  align-items: center;
+  /* height: 3vh; */
+  /* width: 3vh; */
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.HomeDivButton:hover {
+  align-items: center;
+  /* height: 3vh; */
+  /* width: 3vh; */
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.HomeDivButton svg {
+  /* width: 2rem; */
+  vertical-align: middle;
+  min-width: 2rem;
+  margin: 0 1.5rem;
+  }
+
+input{
+  color: var(--text-primary);
+  background-color: var(--bg-secondary)
+}
+fieldset{
+  border-radius: 7px;
+  border-color: var(--border-color);
+}
+textarea{
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+  font-family: minecraft;
+}
+select{
+  color: var(--text-primary);
+  background-color: var(--bg-secondary)
+}
+button{
+  color: var(--text-primary);
+  background-color: var(--bg-secondary)
+}
+label,div{
+  color: var(--text-primary);
+}
+.port-left {
+    float: left; 
+    margin-bottom: 50px;
+}
+.port-right {float: right;}
+.port-center {margin-left: 1.9%;}
+.port {color: var(--text-primary);}
+
+div,html{
+  background-color: var(--bg-primary);
+}
+
+/* The Modal (background) */
+.modal {
+  transition: var(--transition-speed);
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 10px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+}
+
+/* The Close Button */
+.close, .infoclose, .closeConfig {
+  color: #aaaaaa;
+  float: right;
+  /* font-size: 28px; */
+  /* font-weight: bold; */
+}
+
+.close:hover, .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+:root {
+font-size: 16px;
+/* --text-primary: #b6b6b6;
+--text-secondary: #ececec;
+--bg-primary: #23232e;
+--bg-secondary: #141418; */
+--transition-speed: 600ms;
+}
+
+body {
+color: var(--text-primary);
+background-color: var(--bg-primary);
+margin: 0;
+padding: 0;
+}
+
+::-webkit-scrollbar {
+width: 0.45rem;
+}
+::-webkit-scrollbar-track {
+background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+background: var(--text-primary);
+}
+
+.root {}
+
+.navbar {
+position: fixed;
+background-color: var(--bg-primary);
+/* transition: width 600ms ease; */
+overflow: scroll;
+}
+
+.navbar-nav {
+list-style: none;
+padding: 0;
+margin: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+height: 100%;
+}
+
+.nav-item {
+width: 100%;
+}
+
+.nav-item:last-child {
+margin-top: auto;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  filter: grayscale(100%) opacity(1);
+  transition: var(--transition-speed);
+}
+
+.nav-link:hover {
+filter: grayscale(0%) opacity(1);
+background: var(--bg-secondary);
+color: var(--text-secondary);
+}
+
+.link-text {
+display: none;
+margin-left: 1rem;
+}
+
+.nav-link svg {
+width: 2rem;
+min-width: 2rem;
+margin: 0 1.5rem;
+}
+
+/* .fa-primary, .fa-secondary { */
+/* transition: var(--transition-speed); */
+/* color: var(--text-primary) */
+/* } */
+
+.logo {
+text-transform: uppercase;
+margin-bottom: 1rem;
+text-align: center;
+color: var(--text-secondary);
+background: var(--bg-secondary);
+font-size: small;
+letter-spacing: 0.3ch;
+width: 100%;
+}
+
+.logo svg {
+transition: var(--transition-speed);
+}
+
+.logo-text
+{
+display: inline;
+position: absolute;
+left: -999px;
+transition: var(--transition-speed);
+}
+
+.navbar:hover .logo svg {
+/* transform: rotate(-180deg); */
+color: transparent;
+font-size: small;
+}
+
+/* Small screens */
+@media only screen and (max-width: 1000px) {
+.navbar {
+  bottom: 0;
+  width: 100vw;
+  height: 5rem;
+}
+
+.logo {
+  display: none;
+}
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+.nav-link {
+  justify-content: center;
+}
+
+.root {
+  margin: 0;
+  margin-bottom: 5rem;
+}
+}
+
+/* Large screens */
+@media only screen and (min-width: 1000px) {
+  .navbar {
+    top: 0;
+    width: 5rem;
+    height: 100vh;
+  }
+
+  .modal{        
+    background-color: var(--bg-primary); /* Fallback color */
+    background-color: var(--box-primary); /* Black w/ opacity */
+  }
+
+  .navbar {
+    width: 16rem;
+  }
+
+  .navbar .link-text {display: inline;}
+
+  .navbar:hover .logo svg
+  {
+    margin-left: 17rem;
+  }
+
+  .navbar:hover .logo-text
+  {
+    left: 0px;
+  }
+
+  /* Modal Content */
+  .modal-content {
+    background-color: var(--bg-primary);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 85%;
+  }
+}
+
+.dark {
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+  --box-primary: rgba(0,0,0,0.4);
+  --border-color: rgba(255, 255, 255, 0.5);
+}
+
+.light {
+  --text-primary: #1f1f1f;
+  --text-secondary: #000000;
+  --bg-primary: #ffffff;
+  --bg-secondary: #e4e4e4;
+  --box-primary: rgba(0,0,0,0.4);
+  --border-color: rgba(0,0,0,0.5);
+}
+
+.DarkColors{
+  --text-primary: #fff;
+  --text-secondary: #fff;
+  --bg-primary: #1d1d1d;
+  --bg-secondary: #3e3e3e;
+  --box-primary: rgba(0,0,0,0.4);
+  --border-color: rgba(0,0,0,0.5);
+}
+.theme-icon {display: none}
+.dark #darkIcon {display: block}
+.DarkColors #system {display: block}
+.light #lightIcon {display: block}
+.BDSLOG{
+background-color: transparent;
+border: 0 none white;
+padding: 0;
+outline: none;
+}
+.startframe{display: none}
+.info_after{margin-left: 5%}
+.logTEXT{resize: none}
+.all_win{
+  height: 100%;
+  width: 100%;
+}
+.all_win_content {
+  background-color: var(--bg-primary);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+}
+.logTEXT{
+  border: 2px var(--bg-primary);
+  background-color: var(--bg-secondary);
+}
+textarea{
+  border:1px solid #999999;
+  width: 97%;
+  height: 300px;
+  margin:5px 0;
+  padding:3px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 19px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(10px);
+  -ms-transform: translateX(10px);
+  transform: translateX(10px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+  margin-left: 4px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

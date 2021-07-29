@@ -1,0 +1,33 @@
+{
+  "name": "minecraft-bedrock-bridge",
+  "version": "1.0.0",
+  "description": "A Minecraft Bedrock Bridge",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/The-Bds-Maneger/Minecraft-Bedrock-Bridge.git"
+  },
+  "keywords": [
+    "Minecraft",
+    "Minecraft_bedrock",
+    "Minecraft_Java",
+    "Bds-Maneger"
+  ],
+  "author": "Sirherobrine23",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/The-Bds-Maneger/Minecraft-Bedrock-Bridge/issues"
+  },
+  "homepage": "https://github.com/The-Bds-Maneger/Minecraft-Bedrock-Bridge#readme",
+  "dependencies": {
+    "ansi-to-html": "^0.7.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "socket.io": "^4.1.3"
+  }
+}
