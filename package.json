@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node test.js"
+    "test": "node test.js",
+    "dev": "nodemon index.js -e json,js,html,css"
   },
   "repository": {
     "type": "git",
@@ -25,9 +26,13 @@
   "homepage": "https://github.com/The-Bds-Maneger/Minecraft-Bedrock-Bridge#readme",
   "dependencies": {
     "ansi-to-html": "^0.7.1",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
     "socket.io": "^4.1.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }

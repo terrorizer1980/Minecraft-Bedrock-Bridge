@@ -8,7 +8,7 @@ async function Download_File(url = "", Path_Save = "./"){
     try {
       const FetchBuffer = Buffer.from((await (await fetch(url)).toArrayBuffer()));
       fs.writeFileSync(Path_Save, FetchBuffer, "binary")
-      resolve(FetchBuffer);
+      resolve(Path_Save);
     } catch (err){
       console.log(er);
       reject(err);
