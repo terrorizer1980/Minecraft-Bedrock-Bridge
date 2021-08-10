@@ -30,7 +30,7 @@
     "normalize-url": ">=4.5.1"
   },
   "dependencies": {
-    "@electron/remote": "^1.0.4",
+    "@electron/remote": "^1.2.0",
     "yaml": "^1.10.2"
   },
   "build": {
