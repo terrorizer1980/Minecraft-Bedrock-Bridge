@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/Sirherobrine23/Minecraft_phantom_GUI#readme",
   "devDependencies": {
-    "electron": "^12.0.1",
+    "electron": "^12.0.16",
     "electron-builder": "^22.10.5",
     "xmldom": ">=0.5.0",
     "normalize-url": ">=4.5.1"
